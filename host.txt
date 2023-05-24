@@ -1,0 +1,59 @@
+apt-get update && apt-get upgrade && apt-get install curl gnupg2 gcc g++ make libssl-dev -y
+curl -sL https://deb.nodesource.com/setup_current.x -o nodesource_setup.sh && bash nodesource_setup.sh
+apt-get install nodejs -y && npm install npm@latest -g
+
+cd /var/www/html
+
+git clone https://github.com/ubuntonaresh/whostheir-react-web.git react
+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
+
+chown -R www-data:www-data /var/www/html/react
+
+nano /etc/nginx/conf.d/react.conf
+
+
+server {
+         listen 80;
+         listen [::]:80;
+         root /var/www/html/react/;
+         index index.html index.htm;
+         # MODIFY SERVER_NAME EXAMPLE
+         server_name whosthere.co;
+         location / {
+            if (!-e $request_filename){
+                rewrite ^(.*)$ /index.html break;
+            }
+              try_files $uri $uri/ =404;
+         }
+}
+
+
+systemctl restart nginx
+
+
+
+
+
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot python-certbot-nginx =====> sudo apt install -y certbot python3-certbot-apache
+
+sudo certbot --nginx
+apt install python3-certbot-nginx
+
+sudo certbot --nginx
+sudo certbot certonly --nginx
+sudo certbot renew --dry-run
+
+
+/etc/crontab/
+/etc/cron.*/*
+systemctl list-timers
+
+
+
+
